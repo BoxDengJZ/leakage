@@ -63,12 +63,11 @@ void safe_free(void* p){
     
     int unFreeCount = ds_queue_length(_unfreeQueue);
     // 保留的内存大于一定值的时候就释放一部分
+    size_t memSiziee = malloc_size(p);
     if (unFreeCount > MAX_STEAL_MEM_NUM*0.9 || unfreeSize>MAX_STEAL_MEM_SIZE) {
         free_some_mem(BATCH_FREE_NUM);
     }
-    else{
-        size_t memSiziee = malloc_size(p);
-        if (memSiziee > sYHCatchSize) {//有足够的空间才覆盖
+    else if (memSiziee > sYHCatchSize) {//有足够的空间才覆盖
             id obj=(id)p;
             Class origClass= object_getClass(obj);
             // 判断是不是objc对象
@@ -87,12 +86,9 @@ void safe_free(void* p){
                 //多线程下int的原子加操作,多线程对全局变量进行自加，
                 // 不用理,线程锁了
                 ds_queue_put(_unfreeQueue, p);
-            }else{
-               orig_free(p);
             }
-        }else{
-           orig_free(p);
-        }
+    }else{
+        orig_free(p);
     }
 }
 
