@@ -51,7 +51,7 @@ void free_some_mem(size_t freeNum){
     for (int i=0; i<freeNum; i++) {
         void *unfreePoint = ds_queue_get(_unfreeQueue);
         size_t memSiziee = malloc_size(unfreePoint);
-        __sync_fetch_and_sub(&unfreeSize, memSiziee);
+        __sync_fetch_and_sub(&unfreeSize, (int)memSiziee);
         orig_free(unfreePoint);
     }
 #endif
