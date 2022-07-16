@@ -36,7 +36,6 @@ int unfreeSize = 0;//用来记录我们偷偷保存的内存的大小
     
 #ifdef DEBUG
     loadCatchProxyClass();
-    init_safe_free();
 #endif
     
 }
@@ -98,17 +97,15 @@ void loadCatchProxyClass(void) {
     unsigned int count = 0;
     Class *classes = objc_copyClassList(&count);
     for (unsigned int i = 0; i < count; i++) {
-    CFSetAddValue(registeredClasses, (__bridge const void *)(classes[i]));
+        CFSetAddValue(registeredClasses, (__bridge const void *)(classes[i]));
     }
     free(classes);
     classes = NULL;
     
     sYHCatchIsa = objc_getClass("MOACatcher");
     sYHCatchSize = class_getInstanceSize(sYHCatchIsa);
-}
 
-
-void init_safe_free(void) {
+    // void init_safe_free(void)
     _unfreeQueue = ds_queue_create(MAX_STEAL_MEM_NUM);
     orig_free = (void(*)(void*))dlsym(RTLD_DEFAULT, "free");
     rebind_symbols((struct rebinding[]){{"free", (void*)safe_free}}, 1);
