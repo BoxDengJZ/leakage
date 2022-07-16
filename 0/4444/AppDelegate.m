@@ -38,7 +38,7 @@ void safe_free(void* p){
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-   // rebind_symbols((struct rebinding[1]){{"free", safe_free, (void *)&orig_free}}, 1);
+    rebind_symbols((struct rebinding[1]){{"free", safe_free, (void *)&orig_free}}, 1);
     
     
     
