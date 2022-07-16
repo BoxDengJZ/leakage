@@ -24,21 +24,11 @@
                                     <action selector="tap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L6R-aF-cI7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mo1-79-tm7">
-                                <rect key="frame" x="171" y="543.5" width="72" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="second"/>
-                                <connections>
-                                    <action selector="secondTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OTc-HD-6hk"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Mo1-79-tm7" firstAttribute="centerX" secondItem="CbD-sO-mHV" secondAttribute="centerX" id="VaB-SO-5Re"/>
                             <constraint firstItem="CbD-sO-mHV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="cQJ-gw-e5h"/>
-                            <constraint firstItem="Mo1-79-tm7" firstAttribute="top" secondItem="CbD-sO-mHV" secondAttribute="bottom" constant="75" id="gw2-pb-jn6"/>
                             <constraint firstItem="CbD-sO-mHV" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="lAw-VX-8C9"/>
                         </constraints>
                     </view>
