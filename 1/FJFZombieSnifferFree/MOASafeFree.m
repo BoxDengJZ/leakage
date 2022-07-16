@@ -9,7 +9,6 @@
 
 #import "queue.h"
 #import "fishhook.h"
-#import "MOACatcher.h"
 #import "MOASafeFree.h"
 
 #import <dlfcn.h>
@@ -68,20 +67,11 @@ void safe_free(void* p){
     }
     else if (memSiziee > sYHCatchSize) {//有足够的空间才覆盖
             id obj=(id)p;
-            Class origClass= object_getClass(obj);
             // 判断是不是objc对象
             char *type = @encode(typeof(obj));
-            if (strcmp("@", type) == 0 &&
-                 CFSetContainsValue(registeredClasses, origClass)) {
+            if (strcmp("@", type) == 0) {
                 memset(obj, 0x55, memSiziee);
-                memcpy(obj, &sYHCatchIsa, sizeof(void*));
-                //把我们自己的类的isa复制过去
-                
-                
-                object_setClass(obj, [MOACatcher class]);
-                ((MOACatcher *)obj).originClass = origClass;
                 __sync_fetch_and_add(&unfreeSize,(int)memSiziee);
-                
                 //多线程下int的原子加操作,多线程对全局变量进行自加，
                 // 不用理,线程锁了
                 ds_queue_put(_unfreeQueue, p);
