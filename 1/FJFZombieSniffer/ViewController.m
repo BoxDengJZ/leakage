@@ -10,9 +10,20 @@
 
 #import "ViewController.h"
 
+@interface RedView : UIView
+
+@end
+
+@implementation RedView
+
+@end
+
+
 @interface ViewController ()
 
 @end
+
+
 
 @implementation ViewController
 
@@ -33,12 +44,9 @@
 #pragma mark -------------------------- Response  Event
 
 - (void)tmpBtnClickd:(UIButton *)sender {
-    UIView* testObj = [[UIView alloc] init];
+    RedView* testObj = [[RedView alloc] init];
+    [testObj setBackgroundColor: UIColor.redColor];
     [testObj release];
-    for (int i = 0; i < 10; i++) {
-        UIView* testView = [[UIView alloc] initWithFrame:CGRectMake(0,200,CGRectGetWidth(self.view.bounds), 60)];
-        [self.view addSubview:testView];
-    }
     [testObj setNeedsLayout];
 }
 
