@@ -90,7 +90,7 @@ void safe_free(void* p){
     }
 }
 
-void loadCatchProxyClass() {
+void loadCatchProxyClass(void) {
     registeredClasses = CFSetCreateMutable(NULL, 0, NULL);
 
     unsigned int count = 0;
@@ -106,11 +106,10 @@ void loadCatchProxyClass() {
 }
 
 
-bool init_safe_free() {
+void init_safe_free(void) {
     _unfreeQueue = ds_queue_create(MAX_STEAL_MEM_NUM);
     orig_free = (void(*)(void*))dlsym(RTLD_DEFAULT, "free");
     rebind_symbols((struct rebinding[]){{"free", (void*)safe_free}}, 1);
-    return true;
 }
 
 
